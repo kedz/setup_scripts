@@ -1,8 +1,12 @@
 INSTALL_PATH=$HOME/kedz_install
 
+
 if [ "$ZSH" != "$INSTALL_PATH/oh-my-zsh" ]; then
     echo "Installing oh-my-zsh..."
     ZSH=$INSTALL_PATH/oh-my-zsh sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    git clone https://github.com/conda-incubator/conda-zsh-completion $INSTALL_PATH/oh-my-zsh/custom/plugins/conda-zsh-completion
+    cp zsh_configs/.zshrc $HOME/.zshrc
+    source $HOME/.zshrc
     echo "oh-my-zsh installed: $ZSH"
 else
     echo "oh-my-zsh installed: $ZSH"
@@ -45,5 +49,4 @@ else
 fi
 
 # TODO install poetry plugin for ohmyzsh
-# TODO install conda plugin for ohmyzsh
 # TODO install p10k theme
