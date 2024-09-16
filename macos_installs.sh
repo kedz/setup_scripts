@@ -44,9 +44,19 @@ if [ "`which poetry`" = "poetry not found" ]; then
     echo "export PATH=\"/Users/Alix/kedz_install/poetry/bin:\$PATH\"" > $HOME/.zprofile
     source $HOME/.zprofile
     echo "poetry installed: `poetry --version`"
+    mkdir $INSTALL_PATH/oh-my-zsh/custom/plugins/poetry
+    poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
 else
     echo "poetry installed: `poetry --version`"
 fi
 
-# TODO install poetry plugin for ohmyzsh
-# TODO install p10k theme
+if [ ! -f ~/.p10k.zsh ]; then
+# Install p10k theme.
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $INSTALL_PATH/oh-my-zsh/custom/themes/powerlevel10k
+    cp zsh_configs/.p10k.zsh $HOME/.p10k.zsh
+    echo "P10k theme installed."
+else
+    echo "P10k theme installed."
+fi
+
+exec zsh
