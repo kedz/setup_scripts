@@ -50,13 +50,23 @@ else
     echo "poetry installed: `poetry --version`"
 fi
 
-if [ ! -f ~/.p10k.zsh ]; then
 # Install p10k theme.
+if [ ! -f ~/.p10k.zsh ]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $INSTALL_PATH/oh-my-zsh/custom/themes/powerlevel10k
     cp zsh_configs/.p10k.zsh $HOME/.p10k.zsh
     echo "P10k theme installed."
 else
     echo "P10k theme installed."
 fi
+
+# Install neovim
+if [ "`which nvim`" = "nvim not found" ]; then
+    brew install neovim
+    echo `nvim --version`
+else
+    echo `nvim --version`
+fi
+
+
 
 exec zsh
