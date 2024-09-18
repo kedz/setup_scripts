@@ -59,6 +59,15 @@ else
     echo "P10k theme installed."
 fi
 
+
+# Install ripgrep
+if [ "`which rg`" = "rg not found" ]; then
+    brew install ripgrep
+    echo `rg --version`
+else
+    echo `rg --version`
+fi
+
 # Install neovim
 if [ "`which nvim`" = "nvim not found" ]; then
     brew install neovim
