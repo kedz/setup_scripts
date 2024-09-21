@@ -26,4 +26,7 @@ require('pckr').add{
 	{ "nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" } };
 	{ "nvim-treesitter/playground" };
 	{ "theprimeagen/harpoon" };
+	{ "mbbill/undotree" };
+	{ "tpope/vim-fugitive" };
 }
+
