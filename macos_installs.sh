@@ -1,5 +1,13 @@
 INSTALL_PATH=$HOME/kedz_install
 
+NO_EXEC=false
+
+for arg in "$@" ; do
+  echo "${arg}"
+  if [ $arg = "--no-exec" ]; then
+    NO_EXEC=true
+  fi
+done
 
 if [ "$ZSH" != "$INSTALL_PATH/oh-my-zsh" ]; then
     echo "Installing oh-my-zsh..."
@@ -76,6 +84,21 @@ else
     echo `nvim --version`
 fi
 
+if ! grep -q XDG_CONFIG_HOME ~/.zshrc; then
+    echo "export XDG_CONFIG_HOME=\$HOME/.kedz_config" >> ~/.zshrc
+    echo "Setting XDG_CONFIG_HOME=$HOME/.kedz_config"
+else
+    echo "Set XDG_CONFIG_HOME=$HOME/.kedz_config"
+fi
 
+# Install neovim config.
+if [ ! -d $HOME/.kedz_config/nvim ]; then
+    mkdir -p $HOME/.kedz_config
+    cp -r nvim $HOME/.kedz_config/
+    echo "Installing nvim configs to $HOME/.kedz_config/nvim"
+fi
 
-exec zsh
+if [ "$NO_EXEC" = false ]; then
+  echo "Executing zsh"
+  exec zsh
+fi
