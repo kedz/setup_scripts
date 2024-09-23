@@ -1,1 +1,2 @@
-require("kedz")
+require("config.lazy")
+require("config.remap")
