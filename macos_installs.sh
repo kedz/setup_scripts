@@ -84,6 +84,28 @@ else
     echo `nvim --version`
 fi
 
+# Install nvm
+if [ "`which nvm`" = "nvm not found" ]; then
+    brew install nvm
+    source $(brew --prefix nvm)/nvm.sh
+    echo `nvim --version`
+    if ! grep -q nvm.sh ~/.zshrc; then
+        echo "source $(brew --prefix nvm)/nvm.sh" >> ~/.zshrc
+    fi
+else
+    echo "nvm version: `nvm --version`"
+fi
+
+# Install node.js and npm
+if [ "`which node`" = "node not found" ]; then
+    nvm install --lts
+    echo "node version: `node --version`"
+    echo "npm version: `npm --version`"
+else
+    echo "node version: `node --version`"
+    echo "npm version: `npm --version`"
+fi
+
 if ! grep -q XDG_CONFIG_HOME ~/.zshrc; then
     echo "export XDG_CONFIG_HOME=\$HOME/.kedz_config" >> ~/.zshrc
     echo "Setting XDG_CONFIG_HOME=$HOME/.kedz_config"
