@@ -20,3 +20,5 @@ vim.opt.inccommand = "split"
 vim.opt.ignorecase = true
 
 vim.opt.termguicolors = true
+
+vim.g.disable_autoformat = true
