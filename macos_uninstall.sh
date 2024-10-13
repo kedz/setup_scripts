@@ -46,4 +46,12 @@ if [ "$ZSH" = "$INSTALL_PATH/oh-my-zsh" ]; then
     echo "oh-my-zsh already uninstalled."
 fi
 
+
+if [ "$XDG_CONFIG_HOME" = "$HOME/.kedz_config" ]; then
+    unset XDG_CONFIG_HOME
+fi
+if [ "$XDG_DATA_HOME" = "$HOME/kedz_install/nvim" ]; then
+    unset XDG_DATA_HOME
+fi
+
 exec zsh

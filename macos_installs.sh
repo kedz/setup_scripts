@@ -141,8 +141,14 @@ if ! grep -q XDG_CONFIG_HOME ~/.zprofile; then
 else
   echo "Set XDG_CONFIG_HOME=$HOME/.kedz_config"
 fi
+if ! grep -q XDG_DATA_HOME ~/.zprofile; then
+  echo "export XDG_DATA_HOME=\$HOME/kedz_install/nvim" >> ~/.zprofile
+  echo "Setting XDG_DATA_HOME=$HOME/kedz_install/nvim"
+else
+  echo "Set XDG_DATA_HOME=$HOME/kedz_install/nvim"
+fi
 
-Install neovim config.
+#Install neovim config.
 if [ ! -d $HOME/.kedz_config/nvim ]; then
     mkdir -p $HOME/.kedz_config
     cp -r nvim $HOME/.kedz_config/
