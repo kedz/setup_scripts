@@ -157,6 +157,12 @@ fi
 
 cp zsh_configs/aliases.zsh $INSTALL_PATH/oh-my-zsh/custom/
 
+if [ ! -d $INSTALL_PATH/fonts ]; then
+    git clone https://github.com/powerline/fonts.git --depth=2 $INSTALL_PATH/fonts
+    bash $INSTALL_PATH/fonts/install.sh
+    echo "Installed powerline fonts."
+fi
+
 if [ "$NO_EXEC" = false ]; then
   echo "Executing zsh"
   exec zsh
