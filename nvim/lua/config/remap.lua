@@ -3,6 +3,11 @@ vim.g.mapleader = " "
 -- View netrw directory explorer.
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
+-- LSP
+vim.keymap.set("n", "gD", "<cmd>vsplit | lua vim.lsp.buf.declaration()<CR>", { desc = "Jump to declaration." })
+vim.keymap.set("n", "gd", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", { desc = "Jump to definition." })
+vim.keymap.set("n", "gt", "<cmd>vsplit | lua vim.lsp.buf.type_definition()<CR>", { desc = "Jump to type definition." })
+
 -- Trigger formatter.
 vim.keymap.set({ "n", "v" }, "<leader>f", function()
 	local conform = require("conform")
