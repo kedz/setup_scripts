@@ -66,17 +66,6 @@ else
   echo "P10k theme installed."
 fi
 
-# Install poetry
-if [[ ! -d $INSTALL_PATH/poetry ]]; then
-  echo "Installing poetry..."
-  curl -sSL https://install.python-poetry.org | POETRY_HOME=$INSTALL_PATH/poetry python3 -
-
-  echo "export PATH=\"$INSTALL_PATH/poetry/bin:\$PATH\"" >> $HOME/.zprofile
-  echo "poetry installed to: $INSTALL_PATH/poetry"
-else
-  echo "poetry installed: $INSTALL_PATH/poetry"
-fi
-
 if [ "`which brew`" = "brew not found" ]; then
     echo "Installing brew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -86,7 +75,30 @@ if [ "`which brew`" = "brew not found" ]; then
     echo "brew installed: `brew --version`"
 
 else
+
+    if [ ! "`grep HOMEBREW_PREFIX ~/.zprofile`" ]; then
+      PATH=$(echo "$PATH" | sed -e 's/\/opt\/homebrew\/bin://')
+      PATH=$(echo "$PATH" | sed -e 's/\/opt\/homebrew\/sbin://')
+      echo "Adding homebrew to .zprofile"
+      echo `/opt/homebrew/bin/brew shellenv` >> $HOME/.zprofile
+      source $HOME/.zprofile
+    fi
     echo "brew installed: `brew --version`"
+fi
+
+# Install poetry
+if [[ ! -d $INSTALL_PATH/poetry ]]; then
+  echo "Installing poetry..."
+  curl -sSL https://install.python-poetry.org | POETRY_HOME=$INSTALL_PATH/poetry python3 -
+
+  echo "export PATH=\"$INSTALL_PATH/poetry/bin:\$PATH\"" >> $HOME/.zprofile
+  echo "poetry installed to: $INSTALL_PATH/poetry"
+else
+
+  if [ ! "`grep poetry ~/.zprofile`" ]; then
+    echo "export PATH=\"$INSTALL_PATH/poetry/bin:\$PATH\"" >> $HOME/.zprofile
+  fi
+  echo "poetry installed: $INSTALL_PATH/poetry"
 fi
 
 if [[ ! -d $INSTALL_PATH/oh-my-zsh/custom/plugins/poetry ]]; then
